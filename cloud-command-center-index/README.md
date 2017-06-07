@@ -1,4 +1,4 @@
-# [Cloud Command Center](http://entercloud.info) - [project pages](http://startbootstrap.com/template-overviews/landing-page/)
+# [Cloud Command Center](http://entercloud.info) - [project pages](http://github.com/entercloud/)
 
 [Cloud command center](http://entercloud.info) is a multipurpose tool kit for [Entercloud platform](http://entercloud.info/) created by [entercloud](http://entercloud.info).
 
