@@ -1,0 +1,36 @@
+{
+  "version": 4,
+  "terraform_version": "0.14.0",
+  "serial": 1,
+  "lineage": "96ab1c8a-e6fb-98c2-6e94-c2b8b441c38a",
+  "outputs": {},
+  "resources": [
+    {
+      "mode": "managed",
+      "type": "azurerm_resource_group",
+      "name": "MC_ml_cloud_k8s_az-k8s-entercloud_westus",
+      "provider": "provider[\"registry.terraform.io/hashicorp/azurerm\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "id": "/subscriptions/a1364e2e-426d-4721-b8fb-b0204acec004/resourceGroups/MC_ml_cloud_k8s_az-k8s-entercloud_westus",
+            "location": "westus",
+            "name": "MC_ml_cloud_k8s_az-k8s-entercloud_westus",
+            "tags": {
+              "ml": "cloud"
+            },
+            "timeouts": {
+              "create": null,
+              "delete": null,
+              "read": null,
+              "update": null
+            }
+          },
+          "sensitive_attributes": [],
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjo1NDAwMDAwMDAwMDAwLCJkZWxldGUiOjU0MDAwMDAwMDAwMDAsInJlYWQiOjMwMDAwMDAwMDAwMCwidXBkYXRlIjo1NDAwMDAwMDAwMDAwfSwic2NoZW1hX3ZlcnNpb24iOiIwIn0="
+        }
+      ]
+    }
+  ]
+}
