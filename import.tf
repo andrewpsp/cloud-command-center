@@ -24,3 +24,18 @@ resource "azurerm_resource_group" "MC_ml_cloud_k8s_az-k8s-entercloud_westus" {
     location = "eastus"
   }
   
+  resource "azurerm_resource_group" "ml_cloud_k8s"{
+    name = "ml_cloud_k8s"
+    location = "westus"
+    tag = {
+        ml = "cloud_k8s"
+    }
+}
+
+  resource "azurerm_resource_group" "NetworkWatcherRG"{
+    name = "NetworkWatcherRG"
+    location = "westus"
+    tag = {
+        ml = "NetworkWatcherRG"
+    }
+}
