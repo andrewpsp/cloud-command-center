@@ -1,6 +1,18 @@
 provider "azurerm" {
   version = "2.37.0"
-  feature {}
+  features {}
+}
+
+#add remote backend 
+terraform {
+  backend "remote" {
+    hostname      = "app.terraform.io"
+    organization  = "Entercloud"
+
+    workspaces {
+      name = "cloud-command-center"
+    }
+  }
 }
 
 # create resource group
@@ -28,17 +40,12 @@ resource "azurerm_resource_group" "cloud-shell-storage-eastus" {
 resource "azurerm_resource_group" "ml_cloud_k8s" {
   name     = "ml_cloud_k8s"
   location = "westus"
-  tag = {
-    ml = "cloud_k8s"
-  }
 }
 
 resource "azurerm_resource_group" "NetworkWatcherRG" {
   name     = "NetworkWatcherRG"
   location = "westus"
-  tag = {
-    ml = "NetworkWatcherRG"
-  }
+
 }
 
 
@@ -65,11 +72,11 @@ resource "azurerm_kubernetes_cluster" "az-k8s-entercloud" {
 
   service_principal {
     client_id     = azuread_service_principal.srv_principal.application_id
-    client_secret = var.password
+    client_secret = "password"
   }
 
   addon_profile {
-    aci_connector_linux {
+    virtual_node_workloads {
       enabled     = true
       subnet_name = azurerm_subnet.aks-aci.name
     }
@@ -129,11 +136,11 @@ resource "azurerm_subnet" "aks-aci" {
 resource "azurerm_role_assignment" "aks_role" {
   scope                = azurerm_subnet.aks-aci.id
   role_definition_name = "Network Contributor"
-  principal_id         = azuread_service_principal.aks-aci.object_id
+  principal_id         = azuread_service_principal.srv_principal.object_id
 }
 
 resource "azuread_application" "app_read" {
-  name                       = "app_reed"
+  name                       = "app_read"
   homepage                   = "http://homepage"
   identifier_uris            = ["http://uri"]
   reply_urls                 = ["http://replyurl"]
@@ -142,13 +149,13 @@ resource "azuread_application" "app_read" {
 }
 
 resource "azuread_service_principal" "srv_principal" {
-  application_id               = azuread_application.srv_principal.application_id
+  application_id               = azuread_application.app_read.application_id
   app_role_assignment_required = false
 }
 
 resource "azuread_service_principal_password" "password" {
   service_principal_id = azuread_service_principal.srv_principal.id
   description          = "My raw password"
-  value                = password
+  value                = "password"
   end_date             = "2099-01-01T01:02:03Z"
 }
