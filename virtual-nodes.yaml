@@ -1,0 +1,27 @@
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: entercloud-virtual-node
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: entercloud-virtual-node
+  template:
+    metadata:
+      labels:
+        app: entercloud-virtual-node
+    spec:
+      containers:
+      - name: entercloud-virtual-node
+        image: microsoft/aci-helloworld
+        ports:
+        - containerPort: 88
+      nodeSelector:
+        kubernetes.io/role: agent
+        beta.kubernetes.io/os: linux
+        type: virtual-kubelet
+      tolerations:
+      - key: virtual-kubelet.io/provider
+        operator: Exists
