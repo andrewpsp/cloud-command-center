@@ -1,5 +1,4 @@
 provider "azurerm" {
-  version = "2.37.0"
   features {}
 }
 
@@ -10,10 +9,11 @@ terraform {
     organization  = "Entercloud"
 
     workspaces {
-      name = "cloud-command-center"
+      name = "dev-entercloud-app01"
     }
   }
 }
+
 
 # create resource group
 resource "azurerm_resource_group" "MC_ml_cloud_k8s_az-k8s-entercloud_westus" {
@@ -76,7 +76,7 @@ resource "azurerm_kubernetes_cluster" "az-k8s-entercloud" {
   }
 
   addon_profile {
-    virtual_node_workloads {
+    aci_connector_linux {
       enabled     = true
       subnet_name = azurerm_subnet.aks-aci.name
     }
